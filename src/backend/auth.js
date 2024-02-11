@@ -41,19 +41,13 @@ export class AuthService{
 
     async getCurrentUser () {
         try {
-            const getUser = await this.account.get()
-
-            if (getUser) {
-                return getUser
-            } else {
-                return null
-            }
-
+            return await this.account.get()
         } catch (error) {
             console.log("Backend :: getCurrentUser :: error", error)
-            throw error
         }
-    } 
+
+        return null
+    }
 
     async logout () {
         try {
