@@ -13,13 +13,13 @@ export class AuthService{
         this.account = new Account(this.client)
     }
 
-    async createAccount ({email, password, confirm_password}) {
+    async createAccount ({username, email, password, confirm_password}) {
         try {
             const id = ID.unique()            
-            const userAccount = await this.account.create(id, email, password, confirm_password)
+            const userAccount = await this.account.create(id, username, email, password, confirm_password)
 
             if (userAccount) {
-                return this.login({email, password})
+                return this.login({username, password})
             } else {
                 return userAccount
             }
@@ -30,9 +30,9 @@ export class AuthService{
         }
     }
 
-    async login ({email, password}) {
+    async login ({username, password}) {
         try {
-            return await this.account.createEmailSession({email, password})
+            return await this.account.createEmailSession({username, password})
         } catch (error) {
             console.log("Backend :: login :: error", error)
             throw error            
