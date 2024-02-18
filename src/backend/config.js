@@ -19,7 +19,7 @@ export class  AppwriteService{
         try {
             await this.databases.createDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteArticleCollectionId,
                 this.id,
                 {
                     title,
@@ -38,7 +38,7 @@ export class  AppwriteService{
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteArticleCollectionId,
                 id,
                 {
                     title,
@@ -56,7 +56,7 @@ export class  AppwriteService{
         try {
             await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteArticleCollectionId,
                 id,
             )
             return true
@@ -70,7 +70,7 @@ export class  AppwriteService{
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteArticleCollectionId,
                 id,
             )
         } catch (error) {
@@ -83,7 +83,7 @@ export class  AppwriteService{
         try {
             const postList = await this.databases.listDocuments(
                 conf.appwriteDatabaseId, 
-                conf.appwriteCollectionId
+                conf.appwriteArticleCollectionId
             );
             return postList;
         } catch (error) {
@@ -127,6 +127,42 @@ export class  AppwriteService{
         )
     }
     
+    // USERNAME
+    async chooseUsername({userId, username}) {
+        try {
+
+            await this.databases.createDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteUserCollectionId,
+                ID.unique(),
+                {
+                    username,
+                    userId
+                }
+            )
+            return true
+            
+        } catch (error) {
+            console.log("Backend :: Choose Username :: error", error)
+            throw error;
+        }
+    }
+
+    async updateUsername({id, username}) {
+        try {
+            return await this.databases.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteUserCollectionId,
+                id,
+                {
+                    username
+                }
+            )
+        } catch (error) {
+            console.log("Backend :: Update Username :: error", error) 
+            
+        }
+    }
 }
 
 const appwriteService = new AppwriteService();
