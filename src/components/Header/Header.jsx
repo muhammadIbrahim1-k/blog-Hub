@@ -1,6 +1,6 @@
 import React from 'react'
 import authService from '../../backend/auth'
-import {logout} from '../../store/authSlice'
+import {logout} from '../../store/features/authSlice'
 import {useDispatch, useSelector} from 'react-redux'
 import {Container, Logo,  Button, Loading} from '../index'
 import { Link, useNavigate } from 'react-router-dom'
