@@ -1,6 +1,6 @@
 import React from 'react'
 import appwriteService from '../backend/config'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function HomeBlogCard({$id, userId, username, title, blogImage}) {
   return (
