@@ -42,7 +42,7 @@ function Username({
           <Input className={`md:px-5 border outline-none rounded-lg md:pl-2 lg:pl-2 py-2 bg-slate-200 mt-7 px-3 $  {error && 'border-red-500'} `} value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
         {error && <p className='text-red-500 mb-5'>{error}</p>}
-        <div className="hover:bg-black hover:text-white hover:shadow-2xl rounded-md px-4 py-2 font-poppins cursor-pointer" >
+        <div className="cursor-pointer" >
         <Button className="hover:shadow-2xl" onClick={ isUpdate? updateUsernameHandler : setUsernameHandler}>{isUpdate? "UPDATE USERNAME" : "LET'S GO"}</Button>
         </div>
         {...props}
