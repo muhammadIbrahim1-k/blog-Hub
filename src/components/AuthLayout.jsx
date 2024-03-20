@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import Loading from './index'
 
 export default function ProtectedContainer({children, authentication = true}) {
   const navigate = useNavigate()
@@ -17,5 +16,9 @@ export default function ProtectedContainer({children, authentication = true}) {
     setLoader(false)
   }, [authStatus, navigate, authentication] )
     
-  return loader? <Loading/> : <>{children}</>
+  return (
+    <>
+    {children}
+    </>
+  )
 }
