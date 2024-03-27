@@ -3,14 +3,16 @@ import {Input, Button} from './index'
 import authService from '../backend/auth'
 import {login as authLogin} from '../store/features/authSlice'
 import {useForm} from "react-hook-form"
-import  { useDispatch } from 'react-redux'
+import  { useDispatch, useSelector } from 'react-redux'
 import {Link, useNavigate } from 'react-router-dom'
+import GoogleAuth from './GoogleAuth'
 
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [error, setError] = useState("")
-    
+    const isDark = useSelector( state => state.theme.dark )
+
     const {register, handleSubmit} = useForm()
 
     const login = async (data) => {
@@ -28,39 +30,47 @@ function Login() {
     }
 
   return (
-    <div className='flex flex-col items-center justify-center bg-slate-100 rounded-3xl'>
-        <div className="text-center text-2xl font-medium leading-tight">
-            <h2>Sign in to your account</h2>
+    <div className={`${isDark? "dark" : ""}`}>
+        <div className=" bg-white rounded-lg shadow-2xl md:mt-0 sm:max-w-md xl:p-0 dark:bg-slate-900">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
+                    Sign in to your account
+                </h1>
+                <p className="text-sm font-light text-gray-700 dark:text-white">
+                    Don't have an  account? <Link to={'/signup'} className="font-medium text-primary-600 hover:underline ">Create One</Link>
+                </p>
+                {error && <p className='mb-4 text-red-600 '>{error}</p>}
+                <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(login)}>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">EMAIL</label>
+                        <Input 
+                        type="email" 
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com"
+                        {...register('email', {
+                            required : true,
+                            validate: {
+                                matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email address must be a valid address",
+                            }
+                        })}
+                        />
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PASSWORD</label>
+                        <Input 
+                        type="password" 
+                        placeholder="Password" 
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                        {...register('password',{
+                            required:true
+                        })}
+                        />
+                    </div>
+                    <Button type="submit" className="w-full hover:bg-black hover:text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Log In</Button>
+                    <hr className="w-48 h-1 mx-auto my-4 bg-gray-500 border-0 rounded md:my-10 "></hr>
+                </form>
+                <GoogleAuth msg={`Login with Google`} />
+            </div>
         </div>
-        <div className='mt-2 font-light text-base text-center'>
-            <p>Don't have an  account? 
-                <Link to="/signup" className='hover:underline font-normal'>Sign up</Link>
-            </p>
-        </div>
-        {error && <p className='mb-4 text-red-600 text-center'>{error}</p>}
-        <form onSubmit={handleSubmit(login)}>
-            <Input
-            label = 'Email:'
-            placeholder = 'Enter email address'
-            type = 'email'
-            className=" bg-white mt-2 px-3 font-serif"
-            {...register('email', {
-                required : true,
-                validate: {
-                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email address must be a valid address",
-                }
-            })}
-            />
-            <Input
-            label = "Password:"
-            type = "password"
-            placeholder = "Enter your Password"
-            {...register('password', {
-                required: true,                
-            })}
-            />
-            <Button type='sumbit' className='hover:font-sans mb-7'>Sign In</Button>
-        </form>
     </div>
   )
 }

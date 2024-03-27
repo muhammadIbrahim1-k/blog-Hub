@@ -1,10 +1,17 @@
 import React from 'react'
 import logoImage from '../images/logo.png';
+import DarkHeaderLogo from '../images/DarkHeaderLogo.png'
+import { useSelector } from 'react-redux'
 
-function Logo({width = '70px'}) {
+function Logo() {
+  const isDark = useSelector( state => state.theme.dark )
+
   return (
-    <div>
-        <img src={logoImage} alt='Logo' />
+    <div className={`${isDark? "dark" : ""}`}>
+      <div>
+          <img src={logoImage} alt='Logo' className='dark:hidden'/>
+          <img src={DarkHeaderLogo} alt='Logo' className='hidden dark:block'/> 
+      </div>
     </div>
   )
 }

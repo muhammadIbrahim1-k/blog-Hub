@@ -1,9 +1,8 @@
-import {Client, ID, Databases, Storage, Query } from 'appwrite';
+import {Client, ID, Databases, Storage } from 'appwrite';
 import conf from  '../conf/conf'
 
 export class  AppwriteService{
     client = new Client();
-    id = ID.unique()
     databases;
     storage;
 
@@ -20,7 +19,7 @@ export class  AppwriteService{
             await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteArticleCollectionId,
-                this.id,
+                ID.unique(),
                 {
                     title,
                     content,
@@ -34,7 +33,7 @@ export class  AppwriteService{
         }
     }
 
-    async updatePost ({id, title, content, blogImage}) {
+    async updatePost (id, {title, content, blogImage}) {
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -88,7 +87,23 @@ export class  AppwriteService{
             return postList;
         } catch (error) {
             console.log("Backend :: getAllPosts :: error", error) 
-            return null
+            return false
+        }
+    }
+
+
+    async getAllUserPosts (queries) {
+        try {
+            const userPostList = await this.databases.listDocuments(
+                conf.appwriteDatabaseId, 
+                conf.appwriteArticleCollectionId,
+                queries,
+                
+            );
+            return userPostList;
+        } catch (error) {
+            console.log("Backend :: getAllUserPosts :: error", error) 
+            return false
         }
     }
 
@@ -103,7 +118,7 @@ export class  AppwriteService{
             )
         } catch (error) {
             console.log("Backend :: uploadFile :: error", error) 
-            return null
+            return false
         }
     }
 
@@ -127,42 +142,7 @@ export class  AppwriteService{
         )
     }
     
-    // USERNAME
-    async chooseUsername({userId, username}) {
-        try {
 
-            await this.databases.createDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteUserCollectionId,
-                ID.unique(),
-                {
-                    username,
-                    userId
-                }
-            )
-            return true
-            
-        } catch (error) {
-            console.log("Backend :: Choose Username :: error", error)
-            throw error;
-        }
-    }
-
-    async updateUsername({id, username}) {
-        try {
-            return await this.databases.updateDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteUserCollectionId,
-                id,
-                {
-                    username
-                }
-            )
-        } catch (error) {
-            console.log("Backend :: Update Username :: error", error) 
-            
-        }
-    }
 }
 
 const appwriteService = new AppwriteService();

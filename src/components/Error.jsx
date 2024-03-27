@@ -1,21 +1,22 @@
 import React from 'react'
-import {Button} from './index'
+import { useSelector } from 'react-redux'
 
 function Error({
     errorMsg,
-    goBackHandler
 }) {
+  const isDark = useSelector( (state) => state.theme.dark )
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen ">
-        <div className="text-[90px] text-gray-500 font-extralight cursor-none">
-          <p>error</p>
-        </div>
-        <div className="text-[17px] font-serif text-gray-600 cursor-none">
-          <p>`ERROR ||  ${errorMsg}`</p>
-        </div>
-        <div className="hover:bg-black hover:text-white cursor-pointer m-8 font-thin">
-          <Button onClick={goBackHandler}>GO BACK</Button>
-        </div>
+    <div className={`${isDark? "dark" : ""}`}>
+      <div className="flex flex-col text-center dark:bg-slate-900 ">
+          <div className="text-[90px] dark:text-white text-gray-500 font-extralight cursor-none">
+            <p>error</p>
+          </div>
+          <div className="text-[17px] font-serif dark:text-white text-gray-600 cursor-none">
+            <p>{errorMsg}</p>
+          </div>
+
+      </div>
     </div>
   )
 }

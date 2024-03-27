@@ -2,8 +2,9 @@ import React, {useEffect, useState}from  'react'
 import './style/App.css'
 import {useDispatch} from 'react-redux'
 import authService from './backend/auth'
-import {login, logout} from './store/authSlice'
+import {login, logout} from './store/features/authSlice'
 import { Loading, Header, Footer } from './components/index'
+import { Outlet} from 'react-router-dom';
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -13,7 +14,7 @@ function App() {
     authService.getCurrentUser()
     .then( (userData) => {
       if (userData){
-        dispatch(login(userData))
+        dispatch(login({userData}))
       } else {
         dispatch(logout())
       }
@@ -22,10 +23,17 @@ function App() {
     .finally(()=>{setLoading(false)})
   },[])
 
-  return loading? 
-  <Loading /> : (
-    <></>
-  )
+
+  return !loading? 
+  (
+    <>
+    <Header/>
+      <main>
+        <Outlet/>
+      </main>
+    <Footer/>
+    </>
+  ) : <Loading />
 }
 
 export default App

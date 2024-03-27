@@ -10,18 +10,18 @@ export class AuthService{
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId)
 
-        this.account = new Account(this.client)
+            this.account = new Account(this.client)
     }
 
-    async createAccount ({email, password, confirm_password}) {
+    async createAccount ({ email, password, name, confirm_password}) {
         try {
             const id = ID.unique()            
-            const userAccount = await this.account.create(id, email, password, confirm_password)
+            const userAccount = await this.account.create(id, email, password, name, confirm_password )
 
             if (userAccount) {
                 return this.login({email, password})
             } else {
-                return userAccount
+                return false
             }
 
         } catch (error) {
@@ -32,10 +32,10 @@ export class AuthService{
 
     async login ({email, password}) {
         try {
-            return await this.account.createEmailSession({email, password})
+            return await this.account.createEmailSession(email, password)
         } catch (error) {
             console.log("Backend :: login :: error", error)
-            throw error            
+            throw error
         }
     }
 
