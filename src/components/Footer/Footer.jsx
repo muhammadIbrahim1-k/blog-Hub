@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logoImage from '../../images/logo.png';
-import DarkMODELOGO from '../../images/DarkMODELOGO.png'
+import { logoImage, DarkMODELOGO } from '../index';
 import { useSelector } from 'react-redux'
 
 function Footer() {

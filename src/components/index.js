@@ -18,6 +18,7 @@ import DarkBtn from "./DarkBtn";
 import logoImage from '../images/Logo.png'
 import DarkHeaderLogo from '../images/DarkHeaderLogo.png'
 import darkmodeimg from '../images/darkmodeimg.png'
+import DarkMODELOGO from '../images/DarkMODELOGO.png'
 
 export {
     Loading,
@@ -40,4 +41,5 @@ export {
     logoImage,
     DarkHeaderLogo,
     darkmodeimg,
+    DarkMODELOGO,
 }

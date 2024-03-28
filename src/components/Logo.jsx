@@ -1,6 +1,5 @@
 import React from 'react'
-import logoImage from '../images/logo.png';
-import DarkHeaderLogo from '../images/DarkHeaderLogo.png'
+import { logoImage, DarkHeaderLogo } from '.';
 import { useSelector } from 'react-redux'
 
 function Logo() {
