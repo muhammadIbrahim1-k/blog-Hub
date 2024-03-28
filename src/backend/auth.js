@@ -62,8 +62,8 @@ export class AuthService{
         try {
             return this.account.createOAuth2Session(
                 'google',
-                'http://localhost:5173/',
-                'http://localhost:5173/login'
+                'https://blog-hub-navy.vercel.app/',
+                'https://blog-hub-navy.vercel.app/login'
             );
         } catch (error) {
             console.log("Backend :: googleAuth :: error", error)
