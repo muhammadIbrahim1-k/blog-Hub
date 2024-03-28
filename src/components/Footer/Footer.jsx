@@ -26,7 +26,7 @@ function Footer() {
                 <div>
                   <Link className="text-2xl pb-4" to='/'>Company</Link>
                 </div>
-                <div className="pt-1 md:flex md:flex-col">
+                <div className="pt-1 md:flex md:flex-col flex flex-col">
                   <Link to='#'>About</Link>
                   <Link to='#' className="py-2">Blog</Link>
                   <Link to='#'>Job</Link>
@@ -36,7 +36,7 @@ function Footer() {
               </div>
               <div className="my-11 md:pt-1 md:px-5">
                 <Link to='/' className="text-2xl pb-4">Legal</Link>
-                <div className="pt-1 md:flex md:flex-col">
+                <div className="pt-1 md:flex md:flex-col flex flex-col">
                   <Link to='#'>Claim</Link>
                   <Link to='#' className="py-2">Privacy</Link>
                   <Link to='#'>Term</Link>
