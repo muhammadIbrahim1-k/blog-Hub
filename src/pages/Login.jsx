@@ -1,5 +1,5 @@
 import React from 'react'
-import {DarkBtn, Login as LoginComponent} from "../components/index"
+import {Login as LoginComponent} from "../components/index"
 import registrationLogo from '../images/registrationLogo.png';
 import DarkREg from '../images/DarkREg.png';
 import { useSelector } from 'react-redux';

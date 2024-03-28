@@ -1,6 +1,7 @@
 import React from 'react'
-import { logoImage, DarkHeaderLogo } from '.';
 import { useSelector } from 'react-redux'
+import logoImage from '../images/Logo.png';
+import DarkHeaderLogo from '../images/DarkHeaderLogo.png';
 
 function Logo() {
   const isDark = useSelector( state => state.theme.dark )
