@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logoImage from '../../images/Logo.png';
-import DarkHeaderLogo from '../../images/DarkHeaderLogo.png';
+import DarkMODELOGO from '../../images/DarkMODELOGO.png';
 import { useSelector } from 'react-redux'
 
 function Footer() {
@@ -16,7 +16,7 @@ function Footer() {
               <div className="  md:pt-1 md:max-w-60 lg:w-70 lg:ml-8 ">
                 <div className='md:ml-[-30px] md:w-80 '>
                   <Link to='#'>
-                    <img src={DarkHeaderLogo} alt="BlogHub" className='hidden dark:block'/>
+                    <img src={DarkMODELOGO} alt="BlogHub" className='hidden dark:block'/>
                     <img src={logoImage} alt="BlogHub" className='dark:hidden ' />
                   </Link>
                 </div>
